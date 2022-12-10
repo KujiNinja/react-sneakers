@@ -1,6 +1,81 @@
+import Card from './components/Card'
+
 function App() {
   return (
     <div className="wrapper clear">
+      <div style= {{display:"none"}} className="overlay">
+        <div  className="drawer d-flex flex-column">
+          <h2 className="d-flex justify-between mb-30 ">Корзина <img className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Remove"/> </h2>  
+          <div className="items flex">
+          <div className="cartItem d-flex align-center mb-20 cu-p"> 
+            <div style={{ backgroundImage: 'url(/img/sneakers/1.jpeg)' }} className="cartItemImg"></div>
+            <div className="mr-20 flex">
+              <p className="mb-5">Мужские кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>  
+            
+          <div/>
+        </div> 
+        <div className="cartItem d-flex align-center mb-20 cu-p"> 
+            <div style={{ backgroundImage: 'url(/img/sneakers/1.jpeg)' }} className="cartItemImg"></div>
+            <div className="mr-20 flex">
+              <p className="mb-5">Мужские кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>  
+            
+          <div/>
+        </div> 
+        <div className="cartItem d-flex align-center mb-20 cu-p"> 
+            <div style={{ backgroundImage: 'url(/img/sneakers/1.jpeg)' }} className="cartItemImg"></div>
+            <div className="mr-20 flex">
+              <p className="mb-5">Мужские кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>  
+            
+          <div/>
+        </div> 
+        <div className="cartItem d-flex align-center mb-20 cu-p"> 
+            <div style={{ backgroundImage: 'url(/img/sneakers/1.jpeg)' }} className="cartItemImg"></div>
+            <div className="mr-20 flex">
+              <p className="mb-5">Мужские кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>  
+            
+          <div/>
+        </div> 
+        <div className="cartItem d-flex align-center mb-20 cu-p"> 
+            <div style={{ backgroundImage: 'url(/img/sneakers/1.jpeg)' }} className="cartItemImg"></div>
+            <div className="mr-20 flex">
+              <p className="mb-5">Мужские кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>  
+            
+          <div/>
+        </div> 
+          </div>
+          <div className="cartTotalBlock">
+          <ul>
+            <li className="d-flex">
+              <span>Итого:</span>
+              <div></div>
+              <b>21 498 руб.</b>
+            </li>
+            <li className="d-flex">
+              <span>Налог 5%:</span>
+              <div></div>
+              <b>1074 руб.</b>
+            </li>
+          </ul>
+        <button className="greenButton">Оформить заказ <img src="/img/arrow.svg" alt="Arrow"/></button>
+        
+          </div>
+          </div>
+      </div> 
       <header className="d-flex justify-between align-center p-40">
         <div className="d-flex align-center">
           <img width={40} height={40} src="/img/logo.png" />
@@ -21,62 +96,19 @@ function App() {
       </header>
       <div className="content p-40">
       
-        <h1 className="mb-40">Все кроссовки</h1>
+      <div className="d-flex align-center justify-between bm-40">
+        <h1>Все кроссовки</h1>
+
+        <div className="search-block">
+          <img src="/img/search.svg" alt="Search"/>
+          <input placeholder="Поиск ..."/>
+        </div>
+      </div>
         <div className="d-flex">
-        <div className="card">
-          <img width={133} height={112} src="/img/sneakers/1.jpeg" alt="sneaker1"/>
-          <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
-          <div className="d-flex justify-between align-center">
-            <div className="d-flex flex-column">
-              <span>Цена:</span>
-              <b>12 999 руб.</b>
-            </div>
-            <button className="button">
-              <img width={11} height={11} src="/img/plus.svg" alt="Plus"/>
-            </button>
-          </div>
-        </div>
-        <div className="card">
-          <img width={133} height={112} src="/img/sneakers/2.jpeg" alt="sneaker1"/>
-          <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
-          <div className="d-flex justify-between align-center">
-            <div className="d-flex flex-column">
-              <span>Цена:</span>
-              <b>12 999 руб.</b>
-            </div>
-            <button className="button">
-              <img width={11} height={11} src="/img/plus.svg" alt="Plus"/>
-            </button>
-          </div>
-        </div>
-        <div className="card">
-          <img width={133} height={112} src="/img/sneakers/3.jpeg" alt="sneaker1"/>
-          <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
-          <div className="d-flex justify-between align-center">
-            <div className="d-flex flex-column">
-              <span>Цена:</span>
-              <b>12 999 руб.</b>
-            </div>
-            <button className="button">
-              <img width={11} height={11} src="/img/plus.svg" alt="Plus"/>
-            </button>
-          </div>
-        </div>
-        <div className="card">
-          <img width={133} height={112} src="/img/sneakers/4.jpeg" alt="sneaker1"/>
-          <h5>Мужские кроссовки Nike Blazer Mid Suede</h5>
-          <div className="d-flex justify-between align-center">
-            <div className="d-flex flex-column">
-              <span>Цена:</span>
-              <b>12 999 руб.</b>
-            </div>
-            <button className="button">
-              <img width={11} height={11} src="/img/plus.svg" alt="Plus"/>
-            </button>
-          </div>
+      <Card/>
         </div>
         </div>
-        </div>
+    
     </div>
   );
 }
