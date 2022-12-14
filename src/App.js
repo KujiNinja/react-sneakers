@@ -7,16 +7,24 @@ import Drawer from './components/Drawer'
 function App() {
 
   const [items, setItems] = React.useState([])
+  const [cartItems, setCartItems] = React.useState([])
+
   const [cartOpened, setCartOpened] = React.useState(false)
 
-  fetch('https://6399979a16b0fdad77422368.mockapi.io/items')
+  React.useEffect(() => {
+    fetch('https://6399979a16b0fdad77422368.mockapi.io/items')
     .then((res) => {return res.json()})
-    .then((json) => {console.log(json)})
+    .then((json) => {setItems(json)})
+  },[])
 
+  const onAddToCart =(obj) => {
+    
+    setCartItems(prev => [...prev, obj])
+  }
 
-  return (
+return (
     <div className="wrapper clear">
-        {cartOpened && <Drawer onClose={() => setCartOpened(false)}/>}
+        {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)}/>}
         <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
       
@@ -36,7 +44,8 @@ function App() {
                 title = {el.title}
                 price = {el.price}
                 imageUrl = {el.imageUrl}
-
+                onFavorite = {() => console.log('liked')}
+                onPlus = {(obj) => onAddToCart(obj)} 
               />
             ))
           }
