@@ -9,7 +9,6 @@ function App() {
   const [items, setItems] = React.useState([])
   const [cartItems, setCartItems] = React.useState([])
   const [searchValue, setSearchValue] = React.useState('')
-
   const [cartOpened, setCartOpened] = React.useState(false)
 
   React.useEffect(() => {
@@ -49,8 +48,9 @@ return (
         </div>
       </div>
         <div className="d-flex flex-wrap">
-          {
-            items.map((item) => (
+          { items
+              .filter((item) => item.title.toLowerCase().includes(searchValue))
+              .map((item) => (
               <Card 
                 key = {item.id}
                 title = {item.title}
