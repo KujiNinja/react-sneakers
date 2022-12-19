@@ -1,6 +1,17 @@
+import React from "react"
+
 function Drawer({onClose, items}) {
 
-  console.log(items)
+  const [cartSum, setCartSum] = React.useState(null)
+
+  const totalPrice = () => {
+    items.reduce((total, price) => {
+      cartSum += price
+    })
+    setCartSum()
+  }
+
+
   return (
       // style= {{display:"none"}}
       <div className="overlay">
@@ -25,12 +36,12 @@ function Drawer({onClose, items}) {
           <li className="d-flex">
             <span>Итого:</span>
             <div></div>
-            <b>21 498 руб.</b>
+            <b>1488</b>
           </li>
           <li className="d-flex">
             <span>Налог 5%:</span>
             <div></div>
-            <b>1074 руб.</b>
+            <b>0</b>
           </li>
         </ul>
       <button className="greenButton">Оформить заказ <img src="/img/arrow.svg" alt="Arrow"/></button>
