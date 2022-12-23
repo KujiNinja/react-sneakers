@@ -37,6 +37,34 @@ header {
   }
 }
 
+.cartEmpty {
+  text-align: center;
+
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .greenButton {
+    width: 245px;
+    margin-top: 20px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+}
+
 
 .button {
   background: #ffffff;
@@ -89,6 +117,7 @@ header {
   box-shadow: -10px 4px 24px rgba(0,0,0,0.5);
   padding: 30px;
 
+
   .items {
     flex: 1;
     overflow: auto;
@@ -133,10 +162,6 @@ header {
   .greenButton {
       
     position: relative;
-
-    &:hover{
-      transform: translateX(2px);
-    }
     img {
       position: absolute;
       right: 30px;
@@ -162,8 +187,11 @@ header {
 
     &:hover {
       background: lighten($color: #9dd558, $amount: 5%);
+      img {
+        transform: translateX(3px);
+      }
      }
-
+     
      &:active {
       background: darken($color: #9dd558, $amount: 5%);
      }
