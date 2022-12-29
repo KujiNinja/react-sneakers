@@ -3,7 +3,7 @@ import Info from "./Info";
 import AppContext from "../context";
 import axios from "axios";
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onClose, onRemove, items = [] }) {
   const { cartItems, setCartItems } = React.useContext(AppContext);
@@ -12,33 +12,27 @@ function Drawer({ onClose, onRemove, items = [] }) {
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const totalPrice = () => {
-    items.reduce((total, price) => {
-      cartSum += price;
-    });
-    setCartSum();
-  };
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+  const discount = totalPrice * 0.1
 
   const onClickOrder = async () => {
     try {
-      setIsLoading(true)
-      const { data } = await axios.post(
-        process.env.REACT_APP_URL + "/orders",
-        {items: cartItems}
-      );
+      setIsLoading(true);
+      const { data } = await axios.post(process.env.REACT_APP_URL + "/orders", {
+        items: cartItems,
+      });
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
-        await axios.delete( process.env.REACT_APP_URL + `/cart/${item.id}`)
-        await delay(1000)
+        await axios.delete(process.env.REACT_APP_URL + `/cart/${item.id}`);
+        await delay(1000);
       }
     } catch (error) {
-      alert('Не удалось создать заказ')
+      alert("Не удалось создать заказ");
     }
-    setIsLoading(false)
-
+    setIsLoading(false);
   };
 
   return (
@@ -85,17 +79,21 @@ function Drawer({ onClose, onRemove, items = [] }) {
             <div className="cartTotalBlock">
               <ul>
                 <li className="d-flex">
-                  <span>Итого:</span>
+                  <span>Скидка 10%:</span>
                   <div></div>
-                  <b>1488</b>
+                  <b>{discount}</b>
                 </li>
                 <li className="d-flex">
-                  <span>Скидка 5%:</span>
+                  <span>Итого:</span>
                   <div></div>
-                  <b>0</b>
+                  <b>{totalPrice - discount}</b>
                 </li>
               </ul>
-              <button disabled={isLoading} onClick={onClickOrder} className="greenButton">
+              <button
+                disabled={isLoading}
+                onClick={onClickOrder}
+                className="greenButton"
+              >
                 Оформить заказ <img src="/img/arrow.svg" alt="Arrow" />
               </button>
             </div>

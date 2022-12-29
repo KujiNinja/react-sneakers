@@ -9,11 +9,12 @@ import AppContext from "./context";
 
 function App() {
   const [items, setItems] = React.useState([]);
-  const [cartItems, setCartItems] = React.useState([]); 
+  const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+
 
   React.useEffect(() => {
     async function fetchData() {
@@ -28,18 +29,12 @@ function App() {
       ); // axios get запрос для главной
 
       setIsLoading(false);
-
       setCartItems(cartResponse.data);
       setFavorites(favoritesResponse.data);
       setItems(itemsResponse.data);
     }
     fetchData();
-
-    // fetch('https://6399979a16b0fdad77422368.mockapi.io/items')   // fetch get запрос
-    // .then((res) => {return res.json()})
-    // .then((json) => {setItems(json)})
   }, []);
-
 
   const onAddToCart = async (obj) => {
     try {
@@ -71,11 +66,19 @@ function App() {
   const onAddToFavorites = async (obj) => {
     try {
       if (
-        favorites.find((favoriteObj) => Number(favoriteObj.id) === Number(obj.id))) {
-          axios.delete(process.env.REACT_APP_URL + `/favorites/${obj.id}`);
-          setFavorites((prev) => prev.filter(item => Number(item.id) !== Number(obj.id)))
+        favorites.find(
+          (favoriteObj) => Number(favoriteObj.id) === Number(obj.id)
+        )
+      ) {
+        axios.delete(process.env.REACT_APP_URL + `/favorites/${obj.id}`);
+        setFavorites((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        );
       } else {
-        const { data } = await axios.post(process.env.REACT_APP_URL + "/favorites", obj); 
+        const { data } = await axios.post(
+          process.env.REACT_APP_URL + "/favorites",
+          obj
+        );
         setFavorites((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -83,15 +86,27 @@ function App() {
     }
   };
 
-  const getAddedItems = (id) => {                                   // проверка добавления товаров в корзину
-   return cartItems.some((obj) => Number(obj.id) === Number(id))
-  }
+  const getAddedItems = (id) => {
+    // проверка добавления товаров в корзину
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
 
   return (
     //контекст на все приложение
     // в value мы передаем все необходимые данные в пустой обьект context.js и далее вытаскиваем все необходимые данные, таким образом не создаем пропсдрилинг
-    <AppContext.Provider value = {{ items, cartItems, favorites, getAddedItems, onAddToFavorites, setCartOpened, cartItems, setCartItems}}>  
-      <div className="wrapper clear"> 
+    <AppContext.Provider
+      value={{
+        items,
+        cartItems,
+        favorites,
+        getAddedItems,
+        onAddToFavorites,
+        setCartOpened,
+        cartItems,
+        setCartItems,
+      }}
+    >
+      <div className="wrapper clear">
         {cartOpened && (
           <Drawer
             items={cartItems}
