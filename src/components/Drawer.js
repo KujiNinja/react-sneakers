@@ -1,20 +1,18 @@
 import React from "react";
-import Info from "./Info";
-import AppContext from "../context";
+import Info from "./Info"
 import axios from "axios";
+import { useCart } from "../hooks/useCart";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onClose, onRemove, items = [] }) {
-  const { cartItems, setCartItems } = React.useContext(AppContext);
-  const [cartSum, setCartSum] = React.useState(null);
+  const {cartItems, setCartItems, totalPrice} = useCart()
   const [orderID, setOrderId] = React.useState(null);
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
   const discount = totalPrice * 0.1
-
+  
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
