@@ -162,6 +162,12 @@ header {
   .greenButton {
       
     position: relative;
+
+    &:disabled {
+      background-color: #bebebe !important;
+      cursor: default;
+    }
+
     img {
       position: absolute;
       right: 30px;

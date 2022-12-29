@@ -40,6 +40,7 @@ function App() {
     // .then((json) => {setItems(json)})
   }, []);
 
+
   const onAddToCart = async (obj) => {
     try {
       if (
@@ -70,17 +71,11 @@ function App() {
   const onAddToFavorites = async (obj) => {
     try {
       if (
-        favorites.find(
-          (favoriteObj) => Number(favoriteObj.id) === Number(obj.id)
-        )
-      ) {
-        axios.delete(process.env.REACT_APP_URL + `/favorites/${obj.id}`);
-        // setFavorites((prev) => prev.filter(item => item.id !== obj.id))
+        favorites.find((favoriteObj) => Number(favoriteObj.id) === Number(obj.id))) {
+          axios.delete(process.env.REACT_APP_URL + `/favorites/${obj.id}`);
+          setFavorites((prev) => prev.filter(item => Number(item.id) !== Number(obj.id)))
       } else {
-        const { data } = await axios.post(
-          process.env.REACT_APP_URL + "/favorites",
-          obj
-        ); // axios post запрос на состояние favorites
+        const { data } = await axios.post(process.env.REACT_APP_URL + "/favorites", obj); 
         setFavorites((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -88,13 +83,15 @@ function App() {
     }
   };
 
-  const getAddedItems = (id) => {
+  const getAddedItems = (id) => {                                   // проверка добавления товаров в корзину
    return cartItems.some((obj) => Number(obj.id) === Number(id))
   }
 
   return (
-    <AppContext.Provider value = {{ items, cartItems, favorites, getAddedItems }}>
-      <div className="wrapper clear">
+    //контекст на все приложение
+    // в value мы передаем все необходимые данные в пустой обьект context.js и далее вытаскиваем все необходимые данные, таким образом не создаем пропсдрилинг
+    <AppContext.Provider value = {{ items, cartItems, favorites, getAddedItems, onAddToFavorites, setCartOpened, cartItems, setCartItems}}>  
+      <div className="wrapper clear"> 
         {cartOpened && (
           <Drawer
             items={cartItems}
@@ -116,7 +113,7 @@ function App() {
           />
         </Route>
         <Route path="/favorites" exact>
-          <Favorites onAddToFavorites={onAddToFavorites} />
+          <Favorites />
         </Route>
       </div>
     </AppContext.Provider>

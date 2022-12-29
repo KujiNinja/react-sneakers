@@ -13,7 +13,9 @@ function Card({
   favorited = false,
   loading = false,
 }) {
-  const { getAddedItems, items } = React.useContext(AppContext)
+
+
+  const { getAddedItems } = React.useContext(AppContext) //Достаем из контекста метод на проверку добавления
   const [isLiked, setIsLiked] = React.useState(favorited);
 
 
